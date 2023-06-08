@@ -6,10 +6,9 @@ class Presenter {
 
     private val data = CountersModel()
 
-    fun updateValue(id: Int) {
+    fun updateValue(id: Int, updateListener: UpdateView) {
         data.setValueById(id)
+        updateListener.setButtonText(data.getValueById(id).toString())
     }
-
-    fun getValue(id: Int) = data.getValueById(id)
 
 }

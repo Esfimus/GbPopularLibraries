@@ -5,6 +5,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.esfimus.popularlibraries.databinding.ActivityMainBinding
 import com.esfimus.popularlibraries.domain.Presenter
+import com.esfimus.popularlibraries.domain.UpdateView
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,14 +25,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initButton(button: Button) {
-        button.text = presenter.getValue(button.id).toString()
         button.setOnClickListener {
-            updateValue(button)
+            presenter.updateValue(button.id, object : UpdateView {
+                override fun setButtonText(count: String) {
+                    (it as Button).text = count
+                }
+            })
         }
     }
 
-    private fun updateValue(button: Button) {
-        presenter.updateValue(button.id)
-        button.text = presenter.getValue(button.id).toString()
-    }
 }
