@@ -29,4 +29,11 @@
     </style>
 
     <style name="Theme.PopularLibraries" parent="Base.Theme.PopularLibraries" />
+    
+    <style name="CustomButtonStyle" parent="Widget.Material3.Button.ElevatedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">12dp</item>
+        <item name="android:text">@string/button</item>
+    </style>
 </resources>
