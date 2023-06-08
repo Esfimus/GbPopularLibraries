@@ -25,13 +25,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initButton(button: Button) {
+        updateCounter(button)
         button.setOnClickListener {
-            presenter.updateValue(button.id, object : UpdateView {
-                override fun setButtonText(count: String) {
-                    (it as Button).text = count
-                }
-            })
+            updateCounter(button)
         }
+    }
+
+    private fun updateCounter(button: Button) {
+        presenter.updateValue(button.id, object : UpdateView {
+            override fun setButtonText(count: String) {
+                button.text = count
+            }
+        })
     }
 
 }
