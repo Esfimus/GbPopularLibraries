@@ -1,40 +1,19 @@
 package com.esfimus.popularlibraries.mvp.presenter
 
-import com.esfimus.popularlibraries.mvp.model.GithubUser
-import com.esfimus.popularlibraries.mvp.model.GithubUsersRepo
 import com.esfimus.popularlibraries.mvp.view.MainView
-import com.esfimus.popularlibraries.mvp.view.UserItemView
+import com.esfimus.popularlibraries.navigation.ScreensInterface
+import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 
-class MainPresenter(private val usersRepo: GithubUsersRepo) : MvpPresenter<MainView>() {
-
-    class UsersListPresenter : UserListPresenterInterface {
-        val users = mutableListOf<GithubUser>()
-        override var itemClickListener: ((UserItemView) -> Unit)? = null
-
-        override fun getCount() = users.size
-
-        override fun bindView(view: UserItemView) {
-            val user = users[view.pos]
-            view.setLogin(user.login)
-        }
-    }
-
-    val usersListPresenter = UsersListPresenter()
+class MainPresenter(private val router: Router, private val screens: ScreensInterface) :
+    MvpPresenter<MainView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.init()
-        loadData()
-
-        usersListPresenter.itemClickListener = { itemView ->
-            itemView.setLogin("CLICKED")
-        }
+        router.replaceScreen(screens.users())
     }
 
-    private fun loadData() {
-        val users = usersRepo.getUsers()
-        usersListPresenter.users.addAll(users)
-        viewState.updateList()
+    fun backClicked() {
+        router.exit()
     }
 }

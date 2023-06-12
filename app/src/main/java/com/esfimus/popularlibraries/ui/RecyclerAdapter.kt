@@ -22,7 +22,8 @@ RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(RecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
+        ViewHolder(RecyclerviewItemBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false)).apply {
             itemView.setOnClickListener { presenter.itemClickListener?.invoke(this) }
         }
 
