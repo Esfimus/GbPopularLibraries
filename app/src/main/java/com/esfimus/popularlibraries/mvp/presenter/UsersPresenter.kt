@@ -4,6 +4,7 @@ import com.esfimus.popularlibraries.mvp.model.GithubUser
 import com.esfimus.popularlibraries.mvp.model.GithubUsersRepo
 import com.esfimus.popularlibraries.mvp.view.UserItemView
 import com.esfimus.popularlibraries.mvp.view.UsersView
+import com.esfimus.popularlibraries.navigation.AndroidScreens
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 
@@ -31,7 +32,7 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router:
         viewState.init()
         loadData()
         usersListPresenter.itemClickListener = { itemView ->
-            itemView.setLogin("CLICKED")
+            router.navigateTo(AndroidScreens.Screens.selectedUser(usersListPresenter.users[itemView.pos]))
         }
     }
 
