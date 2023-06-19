@@ -97,7 +97,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     private fun saveFile(uri: Uri) {
         requireActivity().contentResolver.openOutputStream(uri)?.use {
-            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, it)
+            presenter.reactiveConvertToPng(bitmap!!, it)
         } ?: throw IllegalStateException("Cannot open output stream")
     }
 
