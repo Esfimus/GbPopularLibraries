@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="decaMargin">20dp</dimen>
     <dimen name="milliMargin">12dp</dimen>
     <dimen name="microMargin">8dp</dimen>
     <dimen name="minHeight">48dp</dimen>
