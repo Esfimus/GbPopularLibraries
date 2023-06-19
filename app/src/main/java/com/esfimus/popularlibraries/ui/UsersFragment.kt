@@ -19,8 +19,6 @@ import com.esfimus.popularlibraries.mvp.view.UsersView
 import com.google.android.material.snackbar.Snackbar
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
@@ -74,7 +72,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
             }
 
             convertButton.setOnClickListener {
-                saveLauncher.launch("${timeStamp()}.png")
+                saveLauncher.launch("${presenter.timeStamp()}.png")
             }
         }
     }
@@ -99,10 +97,6 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         requireActivity().contentResolver.openOutputStream(uri)?.use {
             presenter.reactiveConvertToPng(bitmap!!, it)
         } ?: throw IllegalStateException("Cannot open output stream")
-    }
-
-    private fun timeStamp(): String {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss"))
     }
 
     @SuppressLint("NotifyDataSetChanged")

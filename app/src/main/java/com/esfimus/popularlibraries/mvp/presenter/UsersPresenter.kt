@@ -12,6 +12,8 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import moxy.MvpPresenter
 import java.io.OutputStream
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 const val TAG = "@@@"
 
@@ -58,6 +60,10 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router:
                 { error -> Log.d(TAG, "Reactive $error") }
             )
             .dispose()
+    }
+
+    fun timeStamp(): String {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss"))
     }
 
     fun backPressed(): Boolean {
