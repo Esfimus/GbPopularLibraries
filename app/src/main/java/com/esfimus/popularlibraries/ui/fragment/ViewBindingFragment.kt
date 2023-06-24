@@ -1,4 +1,4 @@
-package com.esfimus.popularlibraries.ui
+package com.esfimus.popularlibraries.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

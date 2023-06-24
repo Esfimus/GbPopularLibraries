@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.SelectedUserFragment"
+    tools:context=".ui.fragment.SelectedUserFragment"
     android:id="@+id/userCard"
     style="@style/Widget.Material3.CardView.Elevated"
     android:layout_width="match_parent"

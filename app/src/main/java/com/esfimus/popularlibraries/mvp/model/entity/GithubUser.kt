@@ -7,37 +7,37 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class GithubUser(
     @Expose
-    val avatar_url: String?,
+    val avatarUrl: String?,
     @Expose
-    val events_url: String?,
+    val eventsUrl: String?,
     @Expose
-    val followers_url: String?,
+    val followersUrl: String?,
     @Expose
-    val following_url: String?,
+    val followingUrl: String?,
     @Expose
-    val gists_url: String?,
+    val gistsUrl: String?,
     @Expose
-    val gravatar_id: String?,
+    val gravatarId: String?,
     @Expose
-    val html_url: String?,
+    val htmlUrl: String?,
     @Expose
     val id: String?,
     @Expose
     val login: String?,
     @Expose
-    val node_id: String?,
+    val nodeId: String?,
     @Expose
-    val organizations_url: String?,
+    val organizationsUrl: String?,
     @Expose
-    val received_events_url: String?,
+    val receivedEventsUrl: String?,
     @Expose
-    val repos_url: String?,
+    val reposUrl: String?,
     @Expose
-    val site_admin: Boolean?,
+    val siteAdmin: Boolean?,
     @Expose
-    val starred_url: String?,
+    val starredUrl: String?,
     @Expose
-    val subscriptions_url: String?,
+    val subscriptionsUrl: String?,
     @Expose
     val type: String?,
     @Expose

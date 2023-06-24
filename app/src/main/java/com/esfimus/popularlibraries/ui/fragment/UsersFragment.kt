@@ -1,4 +1,4 @@
-package com.esfimus.popularlibraries.ui
+package com.esfimus.popularlibraries.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,6 +11,9 @@ import com.esfimus.popularlibraries.mvp.model.api.ApiHolder
 import com.esfimus.popularlibraries.mvp.model.repo.RetrofitGithubUsersRepo
 import com.esfimus.popularlibraries.mvp.presenter.UsersPresenter
 import com.esfimus.popularlibraries.mvp.view.UsersView
+import com.esfimus.popularlibraries.ui.RecyclerAdapter
+import com.esfimus.popularlibraries.ui.activity.BackButtonListener
+import com.esfimus.popularlibraries.ui.image.GlideImageLoader
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -44,7 +47,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     override fun init() {
         with (ui) {
             recyclerUsers.layoutManager = LinearLayoutManager(context)
-            adapter = RecyclerAdapter(presenter.usersListPresenter)
+            adapter = RecyclerAdapter(presenter.usersListPresenter, GlideImageLoader())
             recyclerUsers.adapter = adapter
         }
     }
@@ -55,5 +58,4 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     }
 
     override fun backPressed() = presenter.backPressed()
-
 }

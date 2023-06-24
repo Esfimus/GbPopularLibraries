@@ -2,14 +2,19 @@ package com.esfimus.popularlibraries.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.esfimus.popularlibraries.databinding.RecyclerviewItemBinding
 import com.esfimus.popularlibraries.mvp.presenter.UserListPresenterInterface
+import com.esfimus.popularlibraries.mvp.view.ImageLoaderInterface
 import com.esfimus.popularlibraries.mvp.view.UserItemView
 
 const val INVALID_INDEX = -1
 
-class RecyclerAdapter(private val presenter: UserListPresenterInterface) :
+class RecyclerAdapter(
+    private val presenter: UserListPresenterInterface,
+    private val imageLoader: ImageLoaderInterface<ImageView>
+    ) :
 RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val ui: RecyclerviewItemBinding) :
@@ -18,6 +23,10 @@ RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
         override fun setLogin(text: String) {
             ui.login.text = text
+        }
+
+        override fun loadAvatar(url: String) {
+            imageLoader.loadImage(url, ui.avatar)
         }
     }
 
