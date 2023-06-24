@@ -1,23 +1,18 @@
 package com.esfimus.popularlibraries.mvp.presenter
 
-import android.graphics.Bitmap
-import android.util.Log
 import com.esfimus.popularlibraries.mvp.model.GithubUser
 import com.esfimus.popularlibraries.mvp.model.GithubUsersRepo
 import com.esfimus.popularlibraries.mvp.view.UserItemView
 import com.esfimus.popularlibraries.mvp.view.UsersView
-import com.esfimus.popularlibraries.navigation.AndroidScreens
+import com.esfimus.popularlibraries.navigation.OpenUser
 import com.github.terrakok.cicerone.Router
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
 import moxy.MvpPresenter
-import java.io.OutputStream
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
-const val TAG = "@@@"
-
-class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router: Router) :
+class UsersPresenter(
+    private val usersRepo: GithubUsersRepo,
+    private val router: Router,
+    private val openUser: OpenUser
+    ) :
     MvpPresenter<UsersView>() {
 
     class UsersListPresenter : UserListPresenterInterface {
@@ -40,8 +35,9 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router:
         super.onFirstViewAttach()
         viewState.init()
         loadData()
+
         usersListPresenter.itemClickListener = { itemView ->
-            router.navigateTo(AndroidScreens.Screens.selectedUser(usersListPresenter.users[itemView.pos]))
+            router.navigateTo(openUser.goToUser(usersListPresenter.users[itemView.pos]))
         }
     }
 
@@ -49,21 +45,6 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router:
         val users = usersRepo.getUsers()
         usersListPresenter.users.addAll(users)
         viewState.updateList()
-    }
-
-    fun reactiveConvertToPng(bitmap: Bitmap, outputStream: OutputStream) {
-        Observable.fromSingle(Single.fromCallable { outputStream })
-            .subscribe(
-                { value ->
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, value)
-                },
-                { error -> Log.d(TAG, "Reactive $error") }
-            )
-            .dispose()
-    }
-
-    fun timeStamp(): String {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss"))
     }
 
     fun backPressed(): Boolean {
