@@ -3,7 +3,7 @@ package com.esfimus.popularlibraries.ui
 import android.os.Bundle
 import android.view.View
 import com.esfimus.popularlibraries.databinding.FragmentSelectedUserBinding
-import com.esfimus.popularlibraries.mvp.model.GithubUser
+import com.esfimus.popularlibraries.mvp.model.entity.GithubUser
 
 private const val USER = "selected_user"
 

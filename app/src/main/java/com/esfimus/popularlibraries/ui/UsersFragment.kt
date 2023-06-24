@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.FragmentUsersBinding
-import com.esfimus.popularlibraries.mvp.model.GithubUsersRepo
+import com.esfimus.popularlibraries.mvp.model.api.ApiHolder
+import com.esfimus.popularlibraries.mvp.model.repo.RetrofitGithubUsersRepo
 import com.esfimus.popularlibraries.mvp.presenter.UsersPresenter
 import com.esfimus.popularlibraries.mvp.view.UsersView
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -19,7 +21,12 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val ui get() = _ui!!
     private var adapter: RecyclerAdapter? = null
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(GithubUsersRepo(), App.instance.router, App.instance.openUser)
+        UsersPresenter(
+            AndroidSchedulers.mainThread(),
+            RetrofitGithubUsersRepo(ApiHolder.api),
+            App.instance.router,
+            App.instance.openUser
+        )
     }
 
     companion object { fun newInstance() = UsersFragment() }

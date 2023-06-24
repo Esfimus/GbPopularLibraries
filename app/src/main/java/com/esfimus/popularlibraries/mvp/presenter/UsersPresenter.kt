@@ -1,19 +1,20 @@
 package com.esfimus.popularlibraries.mvp.presenter
 
-import com.esfimus.popularlibraries.mvp.model.GithubUser
-import com.esfimus.popularlibraries.mvp.model.GithubUsersRepo
+import com.esfimus.popularlibraries.mvp.model.entity.GithubUser
+import com.esfimus.popularlibraries.mvp.model.repo.GithubUsersRepoInterface
 import com.esfimus.popularlibraries.mvp.view.UserItemView
 import com.esfimus.popularlibraries.mvp.view.UsersView
 import com.esfimus.popularlibraries.navigation.OpenUser
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 
 class UsersPresenter(
-    private val usersRepo: GithubUsersRepo,
+    private val uiScheduler: Scheduler,
+    private val usersRepo: GithubUsersRepoInterface,
     private val router: Router,
     private val openUser: OpenUser
-    ) :
-    MvpPresenter<UsersView>() {
+    ) : MvpPresenter<UsersView>() {
 
     class UsersListPresenter : UserListPresenterInterface {
 
@@ -23,7 +24,7 @@ class UsersPresenter(
 
         override fun bindView(view: UserItemView) {
             val user = users[view.pos]
-            view.setLogin(user.login)
+            user.login?.let { view.setLogin(it) }
         }
 
         override fun getCount() = users.size
@@ -42,9 +43,16 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        val users = usersRepo.getUsers()
-        usersListPresenter.users.addAll(users)
-        viewState.updateList()
+        usersRepo.getUsers()
+            .observeOn(uiScheduler)
+            .subscribe({ repos ->
+                usersListPresenter.users.clear()
+                usersListPresenter.users.addAll(repos)
+                viewState.updateList()
+            }, {
+                println("Error: ${it.message}")
+            })
+            .isDisposed
     }
 
     fun backPressed(): Boolean {
