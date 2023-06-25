@@ -1,6 +1,9 @@
 package com.esfimus.popularlibraries
 
 import android.app.Application
+import com.esfimus.popularlibraries.navigation.AndroidScreens
+import com.esfimus.popularlibraries.navigation.OpenRepository
+import com.esfimus.popularlibraries.navigation.OpenUser
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
 
@@ -16,6 +19,8 @@ class App : Application() {
 
     val navigatorHolder get() = cicerone.getNavigatorHolder()
     val router get() = cicerone.router
+    val openUser: OpenUser = AndroidScreens()
+    val openRepository: OpenRepository = AndroidScreens()
 
     override fun onCreate() {
         super.onCreate()

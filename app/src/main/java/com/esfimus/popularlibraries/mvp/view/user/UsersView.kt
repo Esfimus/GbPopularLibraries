@@ -1,4 +1,4 @@
-package com.esfimus.popularlibraries.mvp.view
+package com.esfimus.popularlibraries.mvp.view.user
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy

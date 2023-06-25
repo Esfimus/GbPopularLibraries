@@ -1,4 +1,4 @@
-package com.esfimus.popularlibraries.ui
+package com.esfimus.popularlibraries.ui.activity
 
 import android.os.Bundle
 import com.esfimus.popularlibraries.App
