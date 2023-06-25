@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.FragmentSelectedUserBinding
-import com.esfimus.popularlibraries.mvp.model.api.ApiUserRepositories
+import com.esfimus.popularlibraries.mvp.model.api.repositories.ApiUserRepositories
 import com.esfimus.popularlibraries.mvp.model.entity.GithubUser
-import com.esfimus.popularlibraries.mvp.model.repo.RetrofitGithubRepositories
-import com.esfimus.popularlibraries.mvp.presenter.UserRepositoryPresenter
-import com.esfimus.popularlibraries.mvp.view.RepositoryView
+import com.esfimus.popularlibraries.mvp.model.repo.repositories.RetrofitGithubRepositories
+import com.esfimus.popularlibraries.mvp.presenter.repositories.RepositoryPresenter
+import com.esfimus.popularlibraries.mvp.view.repositories.RepositoryView
 import com.esfimus.popularlibraries.ui.activity.BackButtonListener
 import com.esfimus.popularlibraries.ui.adapter.RepositoryRecyclerAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -27,8 +27,8 @@ class SelectedUserFragment(val name: String) : MvpAppCompatFragment(), Repositor
     private var user: GithubUser? = null
     private var adapter: RepositoryRecyclerAdapter? = null
 
-    private val presenter: UserRepositoryPresenter by moxyPresenter {
-        UserRepositoryPresenter(
+    private val presenter: RepositoryPresenter by moxyPresenter {
+        RepositoryPresenter(
             AndroidSchedulers.mainThread(),
             RetrofitGithubRepositories(ApiUserRepositories.api),
             App.instance.router,

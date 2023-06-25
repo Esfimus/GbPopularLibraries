@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.esfimus.popularlibraries.databinding.RepositoryRecyclerviewItemBinding
-import com.esfimus.popularlibraries.mvp.presenter.UserRepositoryListInterface
-import com.esfimus.popularlibraries.mvp.view.RepositoryItemView
+import com.esfimus.popularlibraries.mvp.presenter.repositories.RepositoryListPresenterInterface
+import com.esfimus.popularlibraries.mvp.view.repositories.RepositoryItemView
 
-class RepositoryRecyclerAdapter(private val presenter: UserRepositoryListInterface) :
+class RepositoryRecyclerAdapter(private val presenter: RepositoryListPresenterInterface) :
 RecyclerView.Adapter<RepositoryRecyclerAdapter.ViewHolder>(){
 
     inner class ViewHolder(private val ui: RepositoryRecyclerviewItemBinding) :

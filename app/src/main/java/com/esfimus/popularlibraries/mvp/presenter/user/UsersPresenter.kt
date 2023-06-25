@@ -1,9 +1,9 @@
-package com.esfimus.popularlibraries.mvp.presenter
+package com.esfimus.popularlibraries.mvp.presenter.user
 
 import com.esfimus.popularlibraries.mvp.model.entity.GithubUser
-import com.esfimus.popularlibraries.mvp.model.repo.GithubUsersRepoInterface
-import com.esfimus.popularlibraries.mvp.view.UserItemView
-import com.esfimus.popularlibraries.mvp.view.UsersView
+import com.esfimus.popularlibraries.mvp.model.repo.user.GithubUsersRepoInterface
+import com.esfimus.popularlibraries.mvp.view.user.UserItemView
+import com.esfimus.popularlibraries.mvp.view.user.UsersView
 import com.esfimus.popularlibraries.navigation.OpenUser
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler

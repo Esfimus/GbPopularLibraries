@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.FragmentUsersBinding
-import com.esfimus.popularlibraries.mvp.model.api.ApiHolder
-import com.esfimus.popularlibraries.mvp.model.repo.RetrofitGithubUsersRepo
-import com.esfimus.popularlibraries.mvp.presenter.UsersPresenter
-import com.esfimus.popularlibraries.mvp.view.UsersView
+import com.esfimus.popularlibraries.mvp.model.api.user.ApiHolder
+import com.esfimus.popularlibraries.mvp.model.repo.user.RetrofitGithubUsersRepo
+import com.esfimus.popularlibraries.mvp.presenter.user.UsersPresenter
+import com.esfimus.popularlibraries.mvp.view.user.UsersView
 import com.esfimus.popularlibraries.ui.activity.BackButtonListener
 import com.esfimus.popularlibraries.ui.adapter.UserRecyclerAdapter
 import com.esfimus.popularlibraries.ui.image.GlideImageLoader

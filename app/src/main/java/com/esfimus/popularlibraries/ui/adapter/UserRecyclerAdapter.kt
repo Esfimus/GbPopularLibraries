@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.esfimus.popularlibraries.databinding.UserRecyclerviewItemBinding
-import com.esfimus.popularlibraries.mvp.presenter.UserListPresenterInterface
+import com.esfimus.popularlibraries.mvp.presenter.user.UserListPresenterInterface
 import com.esfimus.popularlibraries.mvp.view.ImageLoaderInterface
-import com.esfimus.popularlibraries.mvp.view.UserItemView
+import com.esfimus.popularlibraries.mvp.view.user.UserItemView
 
 const val INVALID_INDEX = -1
 

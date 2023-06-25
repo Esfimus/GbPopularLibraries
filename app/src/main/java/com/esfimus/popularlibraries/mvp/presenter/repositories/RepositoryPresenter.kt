@@ -1,21 +1,21 @@
-package com.esfimus.popularlibraries.mvp.presenter
+package com.esfimus.popularlibraries.mvp.presenter.repositories
 
 import com.esfimus.popularlibraries.mvp.model.entity.GithubRepository
-import com.esfimus.popularlibraries.mvp.model.repo.GithubUserRepositoryInterface
-import com.esfimus.popularlibraries.mvp.view.RepositoryItemView
-import com.esfimus.popularlibraries.mvp.view.RepositoryView
+import com.esfimus.popularlibraries.mvp.model.repo.repositories.GithubUserRepositoryInterface
+import com.esfimus.popularlibraries.mvp.view.repositories.RepositoryItemView
+import com.esfimus.popularlibraries.mvp.view.repositories.RepositoryView
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 
-class UserRepositoryPresenter(
+class RepositoryPresenter(
     private val uiScheduler: Scheduler,
     private val repository: GithubUserRepositoryInterface,
     private val router: Router,
     private val userLogin: String
 ) : MvpPresenter<RepositoryView>() {
 
-    class RepositoryListPresenter : UserRepositoryListInterface {
+    class RepositoryListPresenterPresenter : RepositoryListPresenterInterface {
 
         val repositories = mutableListOf<GithubRepository>()
 
@@ -29,7 +29,7 @@ class UserRepositoryPresenter(
         override fun getCount() = repositories.size
     }
 
-    val repositoryListPresenter = RepositoryListPresenter()
+    val repositoryListPresenter = RepositoryListPresenterPresenter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

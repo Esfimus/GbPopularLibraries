@@ -1,11 +1,11 @@
-package com.esfimus.popularlibraries.mvp.view
+package com.esfimus.popularlibraries.mvp.view.user
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface RepositoryView : MvpView {
+interface UsersView : MvpView {
     fun init()
     fun updateList()
 }

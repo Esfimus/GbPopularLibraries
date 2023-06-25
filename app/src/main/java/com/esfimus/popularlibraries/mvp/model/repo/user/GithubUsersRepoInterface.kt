@@ -1,4 +1,4 @@
-package com.esfimus.popularlibraries.mvp.model.repo
+package com.esfimus.popularlibraries.mvp.model.repo.user
 
 import com.esfimus.popularlibraries.mvp.model.entity.GithubUser
 import io.reactivex.rxjava3.core.Single
