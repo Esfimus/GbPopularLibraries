@@ -1,165 +1,167 @@
 package com.esfimus.popularlibraries.mvp.model.entity
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class GithubRepository(
     @Expose
-    val allowForking: Boolean?,
+    val allowForking: Boolean? = false,
     @Expose
-    val archiveUrl: String?,
+    val archiveUrl: String? = "",
     @Expose
-    val archived: Boolean?,
+    val archived: Boolean? = false,
     @Expose
-    val assigneesUrl: String?,
+    val assigneesUrl: String? = "",
     @Expose
-    val blobsUrl: String?,
+    val blobsUrl: String? = "",
     @Expose
-    val branchesUrl: String?,
+    val branchesUrl: String? = "",
     @Expose
-    val cloneUrl: String?,
+    val cloneUrl: String? = "",
     @Expose
-    val collaboratorsUrl: String?,
+    val collaboratorsUrl: String? = "",
     @Expose
-    val commentsUrl: String?,
+    val commentsUrl: String? = "",
     @Expose
-    val commitsUrl: String?,
+    val commitsUrl: String? = "",
     @Expose
-    val compareUrl: String?,
+    val compareUrl: String? = "",
     @Expose
-    val contentsUrl: String?,
+    val contentsUrl: String? = "",
     @Expose
-    val contributorsUrl: String?,
+    val contributorsUrl: String? = "",
     @Expose
-    val createdAt: String?,
+    val createdAt: String? = "",
     @Expose
-    val defaultBranch: String?,
+    val defaultBranch: String? = "",
     @Expose
-    val deploymentsUrl: String?,
+    val deploymentsUrl: String? = "",
     @Expose
-    val description: Any?,
+    val description: String? = "",
     @Expose
-    val disabled: Boolean?,
+    val disabled: Boolean? = false,
     @Expose
-    val downloadsUrl: String?,
+    val downloadsUrl: String? = "",
     @Expose
-    val eventsUrl: String?,
+    val eventsUrl: String? = "",
     @Expose
-    val fork: Boolean?,
+    val fork: Boolean? = false,
     @Expose
-    val forks: Int?,
+    val forks: Int? = 0,
     @Expose
-    val forksCount: Int?,
+    val forksCount: Int? = 0,
     @Expose
-    val forksUrl: String?,
+    val forksUrl: String? = "",
     @Expose
-    val fullName: String?,
+    val fullName: String? = "",
     @Expose
-    val gitCommitsUrl: String?,
+    val gitCommitsUrl: String? = "",
     @Expose
-    val gitRefsUrl: String?,
+    val gitRefsUrl: String? = "",
     @Expose
-    val gitTagsUrl: String?,
+    val gitTagsUrl: String? = "",
     @Expose
-    val gitUrl: String?,
+    val gitUrl: String? = "",
     @Expose
-    val hasDiscussions: Boolean?,
+    val hasDiscussions: Boolean? = false,
     @Expose
-    val hasDownloads: Boolean?,
+    val hasDownloads: Boolean? = false,
     @Expose
-    val hasIssues: Boolean?,
+    val hasIssues: Boolean? = false,
     @Expose
-    val hasPages: Boolean?,
+    val hasPages: Boolean? = false,
     @Expose
-    val hasProjects: Boolean?,
+    val hasProjects: Boolean? = false,
     @Expose
-    val hasWiki: Boolean?,
+    val hasWiki: Boolean? = false,
     @Expose
-    val homepage: Any?,
+    val homepage: String? = "",
     @Expose
-    val hooksUrl: String?,
+    val hooksUrl: String? = "",
     @Expose
-    val htmlUrl: String?,
+    val htmlUrl: String? = "",
     @Expose
-    val id: Int?,
+    val id: Int? = 0,
     @Expose
-    val isTemplate: Boolean?,
+    val isTemplate: Boolean? = false,
     @Expose
-    val issueCommentUrl: String?,
+    val issueCommentUrl: String? = "",
     @Expose
-    val issueEventsUrl: String?,
+    val issueEventsUrl: String? = "",
     @Expose
-    val issuesUrl: String?,
+    val issuesUrl: String? = "",
     @Expose
-    val keysUrl: String?,
+    val keysUrl: String? = "",
     @Expose
-    val labelsUrl: String?,
+    val labelsUrl: String? = "",
     @Expose
-    val language: String?,
+    val language: String? = "",
     @Expose
-    val languagesUrl: String?,
+    val languagesUrl: String? = "",
     @Expose
-    val license: Any?,
+    val license: Map<String, String>,
     @Expose
-    val mergesUrl: String?,
+    val mergesUrl: String? = "",
     @Expose
-    val milestonesUrl: String?,
+    val milestonesUrl: String? = "",
     @Expose
-    val mirrorUrl: Any?,
+    val mirrorUrl: String? = "",
     @Expose
-    val name: String?,
+    val name: String? = "",
     @Expose
-    val nodeId: String?,
+    val nodeId: String? = "",
     @Expose
-    val notificationsUrl: String?,
+    val notificationsUrl: String? = "",
     @Expose
-    val openIssues: Int?,
+    val openIssues: Int? = 0,
     @Expose
-    val openIssuesCount: Int?,
+    val openIssuesCount: Int? = 0,
     @Expose
-    val owner: GithubUser?,
+    val owner: GithubUser,
     @Expose
-    val `private`: Boolean?,
+    val `private`: Boolean? = false,
     @Expose
-    val pullsUrl: String?,
+    val pullsUrl: String? = "",
     @Expose
-    val pushedAt: String?,
+    val pushedAt: String? = "",
     @Expose
-    val releasesUrl: String?,
+    val releasesUrl: String? = "",
     @Expose
-    val size: Int?,
+    val size: Int? = 0,
     @Expose
-    val sshUrl: String?,
+    val sshUrl: String? = "",
     @Expose
-    val stargazersCount: Int?,
+    val stargazersCount: Int? = 0,
     @Expose
-    val stargazersUrl: String?,
+    val stargazersUrl: String? = "",
     @Expose
-    val statusesUrl: String?,
+    val statusesUrl: String? = "",
     @Expose
-    val subscribersUrl: String?,
+    val subscribersUrl: String? = "",
     @Expose
-    val subscriptionUrl: String?,
+    val subscriptionUrl: String? = "",
     @Expose
-    val svnUrl: String?,
+    val svnUrl: String? = "",
     @Expose
-    val tagsUrl: String?,
+    val tagsUrl: String? = "",
     @Expose
-    val teamsUrl: String?,
+    val teamsUrl: String? = "",
     @Expose
-    val topics: List<Any?>?,
+    val topics: List<String?>? = listOf(),
     @Expose
-    val treesUrl: String?,
+    val treesUrl: String? = "",
     @Expose
-    val updatedAt: String?,
+    val updatedAt: String? = "",
     @Expose
-    val url: String?,
+    val url: String? = "",
     @Expose
-    val visibility: String?,
+    val visibility: String? = "",
     @Expose
-    val watchers: Int?,
+    val watchers: Int? = 0,
     @Expose
-    val watchersCount: Int?,
+    val watchersCount: Int? = 0,
     @Expose
-    val webCommitSignoffRequired: Boolean?
-)
+    val webCommitSignoffRequired: Boolean? = false
+) : Parcelable

@@ -32,6 +32,7 @@ class SelectedUserFragment(val name: String) : MvpAppCompatFragment(), Repositor
             AndroidSchedulers.mainThread(),
             RetrofitGithubRepositories(ApiUserRepositories.api),
             App.instance.router,
+            App.instance.openRepository,
             name
         )
     }

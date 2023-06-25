@@ -4,6 +4,7 @@ import com.esfimus.popularlibraries.mvp.model.entity.GithubRepository
 import com.esfimus.popularlibraries.mvp.model.repo.repositories.GithubUserRepositoryInterface
 import com.esfimus.popularlibraries.mvp.view.repositories.RepositoryItemView
 import com.esfimus.popularlibraries.mvp.view.repositories.RepositoryView
+import com.esfimus.popularlibraries.navigation.OpenRepository
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
@@ -12,6 +13,7 @@ class RepositoryPresenter(
     private val uiScheduler: Scheduler,
     private val repository: GithubUserRepositoryInterface,
     private val router: Router,
+    private val openRepository: OpenRepository,
     private val userLogin: String
 ) : MvpPresenter<RepositoryView>() {
 
@@ -36,8 +38,8 @@ class RepositoryPresenter(
         viewState.init()
         loadData(userLogin)
 
-        repositoryListPresenter.itemClickListener = {
-
+        repositoryListPresenter.itemClickListener = { itemView ->
+            router.navigateTo(openRepository.goToRepository(repositoryListPresenter.repositories[itemView.pos]))
         }
     }
 
