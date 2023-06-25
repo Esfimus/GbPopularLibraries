@@ -1,23 +1,56 @@
 package com.esfimus.popularlibraries.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.FragmentSelectedUserBinding
+import com.esfimus.popularlibraries.mvp.model.api.ApiUserRepositories
 import com.esfimus.popularlibraries.mvp.model.entity.GithubUser
+import com.esfimus.popularlibraries.mvp.model.repo.RetrofitGithubRepositories
+import com.esfimus.popularlibraries.mvp.presenter.UserRepositoryPresenter
+import com.esfimus.popularlibraries.mvp.view.RepositoryView
+import com.esfimus.popularlibraries.ui.activity.BackButtonListener
+import com.esfimus.popularlibraries.ui.adapter.RepositoryRecyclerAdapter
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
 private const val USER = "selected_user"
 
-class SelectedUserFragment : ViewBindingFragment<FragmentSelectedUserBinding>(
-    FragmentSelectedUserBinding::inflate
-) {
+class SelectedUserFragment(val name: String) : MvpAppCompatFragment(), RepositoryView, BackButtonListener {
 
+    private var _ui: FragmentSelectedUserBinding? = null
+    private val ui get() = _ui!!
     private var user: GithubUser? = null
+    private var adapter: RepositoryRecyclerAdapter? = null
+
+    private val presenter: UserRepositoryPresenter by moxyPresenter {
+        UserRepositoryPresenter(
+            AndroidSchedulers.mainThread(),
+            RetrofitGithubRepositories(ApiUserRepositories.api),
+            App.instance.router,
+            name
+        )
+    }
 
     companion object {
         @JvmStatic
-        fun newInstance(user: GithubUser) = SelectedUserFragment().apply {
+        fun newInstance(user: GithubUser) = SelectedUserFragment(user.login!!).apply {
             arguments = Bundle().apply { putParcelable(USER, user) }
         }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        FragmentSelectedUserBinding.inflate(inflater, container, false).also {
+            _ui = it
+        }.root
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _ui = null
     }
 
     @Suppress("DEPRECATION")
@@ -28,12 +61,20 @@ class SelectedUserFragment : ViewBindingFragment<FragmentSelectedUserBinding>(
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initView()
+    override fun init() {
+        with (ui) {
+            login.text = user?.login ?: ""
+            recyclerRepositories.layoutManager = LinearLayoutManager(context)
+            adapter = RepositoryRecyclerAdapter(presenter.repositoryListPresenter)
+            recyclerRepositories.adapter = adapter
+        }
     }
 
-    private fun initView() {
-        ui.login.text = user?.login ?: ""
+    @SuppressLint("NotifyDataSetChanged")
+    override fun updateList() {
+        adapter?.notifyDataSetChanged()
     }
+
+    override fun backPressed() = presenter.backPressed()
+
 }

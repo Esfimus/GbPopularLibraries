@@ -11,8 +11,8 @@ import com.esfimus.popularlibraries.mvp.model.api.ApiHolder
 import com.esfimus.popularlibraries.mvp.model.repo.RetrofitGithubUsersRepo
 import com.esfimus.popularlibraries.mvp.presenter.UsersPresenter
 import com.esfimus.popularlibraries.mvp.view.UsersView
-import com.esfimus.popularlibraries.ui.RecyclerAdapter
 import com.esfimus.popularlibraries.ui.activity.BackButtonListener
+import com.esfimus.popularlibraries.ui.adapter.UserRecyclerAdapter
 import com.esfimus.popularlibraries.ui.image.GlideImageLoader
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
@@ -22,7 +22,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     private var _ui: FragmentUsersBinding? = null
     private val ui get() = _ui!!
-    private var adapter: RecyclerAdapter? = null
+    private var adapter: UserRecyclerAdapter? = null
     private val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(
             AndroidSchedulers.mainThread(),
@@ -47,7 +47,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     override fun init() {
         with (ui) {
             recyclerUsers.layoutManager = LinearLayoutManager(context)
-            adapter = RecyclerAdapter(presenter.usersListPresenter, GlideImageLoader())
+            adapter = UserRecyclerAdapter(presenter.usersListPresenter, GlideImageLoader())
             recyclerUsers.adapter = adapter
         }
     }
