@@ -7,39 +7,39 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class GithubUser(
     @Expose
-    val avatarUrl: String?,
+    val avatarUrl: String? = "",
     @Expose
-    val eventsUrl: String?,
+    val eventsUrl: String? = "",
     @Expose
-    val followersUrl: String?,
+    val followersUrl: String? = "",
     @Expose
-    val followingUrl: String?,
+    val followingUrl: String? = "",
     @Expose
-    val gistsUrl: String?,
+    val gistsUrl: String? = "",
     @Expose
-    val gravatarId: String?,
+    val gravatarId: String? = "",
     @Expose
-    val htmlUrl: String?,
+    val htmlUrl: String? = "",
     @Expose
-    val id: String?,
+    val id: String? = "",
     @Expose
-    val login: String?,
+    val login: String? = "",
     @Expose
-    val nodeId: String?,
+    val nodeId: String? = "",
     @Expose
-    val organizationsUrl: String?,
+    val organizationsUrl: String? = "",
     @Expose
-    val receivedEventsUrl: String?,
+    val receivedEventsUrl: String? = "",
     @Expose
-    val reposUrl: String?,
+    val reposUrl: String? = "",
     @Expose
-    val siteAdmin: Boolean?,
+    val siteAdmin: Boolean? = false,
     @Expose
-    val starredUrl: String?,
+    val starredUrl: String? = "",
     @Expose
-    val subscriptionsUrl: String?,
+    val subscriptionsUrl: String? = "",
     @Expose
-    val type: String?,
+    val type: String? = "",
     @Expose
-    val url: String?
+    val url: String? = ""
 ) : Parcelable

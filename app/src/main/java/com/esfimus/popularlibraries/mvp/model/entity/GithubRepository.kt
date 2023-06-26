@@ -101,7 +101,7 @@ data class GithubRepository(
     @Expose
     val languagesUrl: String? = "",
     @Expose
-    val license: Map<String, String>,
+    val license: Map<String, String> = mapOf(),
     @Expose
     val mergesUrl: String? = "",
     @Expose
@@ -119,7 +119,7 @@ data class GithubRepository(
     @Expose
     val openIssuesCount: Int? = 0,
     @Expose
-    val owner: GithubUser,
+    val owner: GithubUser = GithubUser(),
     @Expose
     val `private`: Boolean? = false,
     @Expose
