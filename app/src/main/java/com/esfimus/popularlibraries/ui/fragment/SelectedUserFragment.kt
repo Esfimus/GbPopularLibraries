@@ -9,6 +9,7 @@ import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.FragmentSelectedUserBinding
 import com.esfimus.popularlibraries.mvp.model.api.repositories.ApiUserRepositories
 import com.esfimus.popularlibraries.mvp.model.entity.GithubUser
+import com.esfimus.popularlibraries.mvp.model.entity.room.Database
 import com.esfimus.popularlibraries.mvp.model.repo.repositories.RetrofitGithubRepositories
 import com.esfimus.popularlibraries.mvp.presenter.repositories.RepositoryPresenter
 import com.esfimus.popularlibraries.mvp.view.repositories.RepositoryView
@@ -30,7 +31,7 @@ class SelectedUserFragment(val name: String) : MvpAppCompatFragment(), Repositor
     private val presenter: RepositoryPresenter by moxyPresenter {
         RepositoryPresenter(
             AndroidSchedulers.mainThread(),
-            RetrofitGithubRepositories(ApiUserRepositories.api),
+            RetrofitGithubRepositories(ApiUserRepositories.api, App.networkStatus, Database.getInstance()),
             App.instance.router,
             App.instance.openRepository,
             name

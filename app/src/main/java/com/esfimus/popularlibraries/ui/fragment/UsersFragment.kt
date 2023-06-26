@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.FragmentUsersBinding
 import com.esfimus.popularlibraries.mvp.model.api.user.ApiHolder
+import com.esfimus.popularlibraries.mvp.model.entity.room.Database
 import com.esfimus.popularlibraries.mvp.model.repo.user.RetrofitGithubUsersRepo
 import com.esfimus.popularlibraries.mvp.presenter.user.UsersPresenter
 import com.esfimus.popularlibraries.mvp.view.user.UsersView
@@ -26,7 +27,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(
             AndroidSchedulers.mainThread(),
-            RetrofitGithubUsersRepo(ApiHolder.api),
+            RetrofitGithubUsersRepo(ApiHolder.api, App.networkStatus, Database.getInstance()),
             App.instance.router,
             App.instance.openUser
         )
