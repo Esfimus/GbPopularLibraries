@@ -25,7 +25,7 @@ class RepositoryPresenter(
 
         override fun bindView(view: RepositoryItemView) {
             val repository = repositories[view.pos]
-            repository.name?.let { view.setRepositoryName(it) }
+            repository.fullName?.let { view.setRepositoryName(it) }
         }
 
         override fun getCount() = repositories.size

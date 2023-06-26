@@ -1,7 +1,7 @@
 package com.esfimus.popularlibraries
 
 import android.app.Application
-import com.esfimus.popularlibraries.mvp.model.entity.room.Database
+import com.esfimus.popularlibraries.mvp.model.entity.room.database.Database
 import com.esfimus.popularlibraries.mvp.model.network.NetworkStatusInterface
 import com.esfimus.popularlibraries.navigation.AndroidScreens
 import com.esfimus.popularlibraries.navigation.OpenRepository

@@ -1,4 +1,4 @@
-package com.esfimus.popularlibraries.mvp.model.entity.room
+package com.esfimus.popularlibraries.mvp.model.entity.room.database
 
 import androidx.room.Dao
 import androidx.room.Delete

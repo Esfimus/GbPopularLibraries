@@ -2,16 +2,16 @@ package com.esfimus.popularlibraries.mvp.model.repo.user
 
 import com.esfimus.popularlibraries.mvp.model.api.user.DataSourceInterface
 import com.esfimus.popularlibraries.mvp.model.entity.GithubUser
-import com.esfimus.popularlibraries.mvp.model.entity.room.Database
-import com.esfimus.popularlibraries.mvp.model.entity.room.RoomGithubUser
+import com.esfimus.popularlibraries.mvp.model.entity.room.database.RoomGithubUser
+import com.esfimus.popularlibraries.mvp.model.entity.room.UserCacheInterface
 import com.esfimus.popularlibraries.mvp.model.network.NetworkStatusInterface
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class RetrofitGithubUsersRepo(
+class RetrofitGithubUsers(
     private val api: DataSourceInterface,
     private val networkStatus: NetworkStatusInterface,
-    private val db: Database
+    private val userCache: UserCacheInterface
 ) : GithubUsersRepoInterface {
     override fun getUsers() = networkStatus.isOnlineSingle().flatMap { isOnline ->
         if (isOnline) {
@@ -24,13 +24,14 @@ class RetrofitGithubUsersRepo(
                             avatarUrl = user.avatarUrl ?: "",
                         )
                     }
-                    db.userDao.insert(roomUsers)
+                    userCache.insertUsers(roomUsers)
                     users
                 }
             }
         } else {
             Single.fromCallable {
-                db.userDao.getAll().map { roomUser ->
+                userCache.getUsers()
+                    .map { roomUser ->
                     GithubUser(
                         id = roomUser.id,
                         login = roomUser.login,

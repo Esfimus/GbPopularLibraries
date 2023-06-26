@@ -1,4 +1,4 @@
-package com.esfimus.popularlibraries.mvp.model.entity.room
+package com.esfimus.popularlibraries.mvp.model.entity.room.database
 
 import android.content.Context
 import androidx.room.Room

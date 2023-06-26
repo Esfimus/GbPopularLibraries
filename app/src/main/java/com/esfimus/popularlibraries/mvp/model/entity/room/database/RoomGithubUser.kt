@@ -1,4 +1,4 @@
-package com.esfimus.popularlibraries.mvp.model.entity.room
+package com.esfimus.popularlibraries.mvp.model.entity.room.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
