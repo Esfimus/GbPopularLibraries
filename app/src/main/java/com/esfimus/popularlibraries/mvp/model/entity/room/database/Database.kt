@@ -12,7 +12,7 @@ abstract class Database : RoomDatabase() {
     abstract val repositoryDao: RepositoryDao
 
     companion object {
-        private const val DATABASE = "database.db"
+        const val DATABASE = "database.db"
         private var instance: Database? = null
         fun getInstance() = instance ?: throw RuntimeException(DB_EXCEPTION)
 
