@@ -26,9 +26,9 @@ class RepoModule {
 
     @Singleton
     @Provides
-    fun repositoriesRepo(
-        api: RepositorySourceInterface,
+    fun repository(
+        apiRepositories: RepositorySourceInterface,
         networkStatus: NetworkStatusInterface,
         cache: RepositoriesCacheInterface
-    ): GithubUserRepositoryInterface = RetrofitGithubRepositories(api, networkStatus, cache)
+    ): GithubUserRepositoryInterface = RetrofitGithubRepositories(apiRepositories, networkStatus, cache)
 }

@@ -10,8 +10,10 @@ import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import javax.inject.Inject
 
-class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersView>() {
+class UsersPresenter : MvpPresenter<UsersView>() {
 
+    @Inject
+    lateinit var uiScheduler: Scheduler
     @Inject
     lateinit var usersRepo: GithubUsersRepoInterface
     @Inject

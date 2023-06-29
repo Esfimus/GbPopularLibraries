@@ -1,6 +1,7 @@
 package com.esfimus.popularlibraries.di.module
 
 import com.esfimus.popularlibraries.App
+import com.esfimus.popularlibraries.mvp.model.api.repositories.RepositorySourceInterface
 import com.esfimus.popularlibraries.mvp.model.api.user.DataSourceInterface
 import com.esfimus.popularlibraries.mvp.model.network.NetworkStatusInterface
 import com.esfimus.popularlibraries.ui.network.AndroidNetworkStatus
@@ -31,6 +32,16 @@ class ApiModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(DataSourceInterface::class.java)
+
+    @Singleton
+    @Provides
+    fun apiRepositories(@Named("baseUrl") baseUrl: String, gson: Gson): RepositorySourceInterface =
+        Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+            .create(RepositorySourceInterface::class.java)
 
     @Singleton
     @Provides

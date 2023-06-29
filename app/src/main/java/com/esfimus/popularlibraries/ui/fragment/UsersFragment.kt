@@ -12,7 +12,6 @@ import com.esfimus.popularlibraries.mvp.view.user.UsersView
 import com.esfimus.popularlibraries.ui.activity.BackButtonListener
 import com.esfimus.popularlibraries.ui.adapter.UserRecyclerAdapter
 import com.esfimus.popularlibraries.ui.image.GlideImageLoader
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -22,7 +21,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val ui get() = _ui!!
     private var adapter: UserRecyclerAdapter? = null
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(AndroidSchedulers.mainThread()).apply {
+        UsersPresenter().apply {
             App.instance.appComponent.inject(this)
         }
     }
