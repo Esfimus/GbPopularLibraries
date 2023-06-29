@@ -11,7 +11,6 @@ import com.esfimus.popularlibraries.mvp.presenter.user.UsersPresenter
 import com.esfimus.popularlibraries.mvp.view.user.UsersView
 import com.esfimus.popularlibraries.ui.activity.BackButtonListener
 import com.esfimus.popularlibraries.ui.adapter.UserRecyclerAdapter
-import com.esfimus.popularlibraries.ui.image.GlideImageLoader
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -41,7 +40,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     override fun init() {
         with (ui) {
             recyclerUsers.layoutManager = LinearLayoutManager(context)
-            adapter = UserRecyclerAdapter(presenter.usersListPresenter, GlideImageLoader())
+            adapter = UserRecyclerAdapter(presenter.usersListPresenter)
             recyclerUsers.adapter = adapter
         }
     }
