@@ -8,13 +8,18 @@ import com.esfimus.popularlibraries.navigation.OpenUser
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
+import javax.inject.Inject
 
-class UsersPresenter(
-    private val uiScheduler: Scheduler,
-    private val usersRepo: GithubUsersRepoInterface,
-    private val router: Router,
-    private val openUser: OpenUser
-    ) : MvpPresenter<UsersView>() {
+class UsersPresenter : MvpPresenter<UsersView>() {
+
+    @Inject
+    lateinit var uiScheduler: Scheduler
+    @Inject
+    lateinit var usersRepo: GithubUsersRepoInterface
+    @Inject
+    lateinit var router: Router
+    @Inject
+    lateinit var openUser: OpenUser
 
     class UsersListPresenter : UserListPresenterInterface {
 

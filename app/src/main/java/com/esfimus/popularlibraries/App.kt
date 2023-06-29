@@ -1,35 +1,27 @@
 package com.esfimus.popularlibraries
 
 import android.app.Application
+import com.esfimus.popularlibraries.di.AppComponent
+import com.esfimus.popularlibraries.di.DaggerAppComponent
+import com.esfimus.popularlibraries.di.module.AppModule
 import com.esfimus.popularlibraries.mvp.model.entity.room.database.Database
-import com.esfimus.popularlibraries.mvp.model.network.NetworkStatusInterface
-import com.esfimus.popularlibraries.navigation.AndroidScreens
-import com.esfimus.popularlibraries.navigation.OpenRepository
-import com.esfimus.popularlibraries.navigation.OpenUser
-import com.esfimus.popularlibraries.ui.network.AndroidNetworkStatus
-import com.github.terrakok.cicerone.Cicerone
-import com.github.terrakok.cicerone.Router
 
 class App : Application() {
 
     companion object {
         lateinit var instance: App
-        lateinit var networkStatus: NetworkStatusInterface
     }
 
-    private val cicerone: Cicerone<Router> by lazy {
-        Cicerone.create()
-    }
-
-    val navigatorHolder get() = cicerone.getNavigatorHolder()
-    val router get() = cicerone.router
-    val openUser: OpenUser = AndroidScreens()
-    val openRepository: OpenRepository = AndroidScreens()
+    lateinit var appComponent: AppComponent
+        private set
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        networkStatus = AndroidNetworkStatus(instance)
         Database.create(this)
+
+        appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(this))
+            .build()
     }
 }

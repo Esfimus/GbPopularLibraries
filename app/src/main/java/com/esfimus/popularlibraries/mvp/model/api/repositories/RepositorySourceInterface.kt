@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface RepositorySourceInterface {
-    @GET("{user}/repos")
+    @GET("/users/{user}/repos")
     fun getRepositories(@Path("user") userLogin: String): Single<List<GithubRepository>>
 }

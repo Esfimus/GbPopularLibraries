@@ -7,15 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.FragmentUsersBinding
-import com.esfimus.popularlibraries.mvp.model.api.user.ApiHolder
-import com.esfimus.popularlibraries.mvp.model.entity.room.RoomUserCache
-import com.esfimus.popularlibraries.mvp.model.repo.user.RetrofitGithubUsers
 import com.esfimus.popularlibraries.mvp.presenter.user.UsersPresenter
 import com.esfimus.popularlibraries.mvp.view.user.UsersView
 import com.esfimus.popularlibraries.ui.activity.BackButtonListener
 import com.esfimus.popularlibraries.ui.adapter.UserRecyclerAdapter
-import com.esfimus.popularlibraries.ui.image.GlideImageLoader
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -25,16 +20,9 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val ui get() = _ui!!
     private var adapter: UserRecyclerAdapter? = null
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitGithubUsers(
-                ApiHolder.api,
-                App.networkStatus,
-                RoomUserCache()
-            ),
-            App.instance.router,
-            App.instance.openUser
-        )
+        UsersPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     companion object { fun newInstance() = UsersFragment() }
@@ -52,7 +40,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     override fun init() {
         with (ui) {
             recyclerUsers.layoutManager = LinearLayoutManager(context)
-            adapter = UserRecyclerAdapter(presenter.usersListPresenter, GlideImageLoader())
+            adapter = UserRecyclerAdapter(presenter.usersListPresenter)
             recyclerUsers.adapter = adapter
         }
     }

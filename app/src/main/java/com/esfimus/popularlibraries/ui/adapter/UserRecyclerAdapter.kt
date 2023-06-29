@@ -4,18 +4,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.UserRecyclerviewItemBinding
 import com.esfimus.popularlibraries.mvp.presenter.user.UserListPresenterInterface
 import com.esfimus.popularlibraries.mvp.view.ImageLoaderInterface
 import com.esfimus.popularlibraries.mvp.view.user.UserItemView
+import javax.inject.Inject
 
 const val INVALID_INDEX = -1
 
-class UserRecyclerAdapter(
-    private val presenter: UserListPresenterInterface,
-    private val imageLoader: ImageLoaderInterface<ImageView>
-    ) :
-RecyclerView.Adapter<UserRecyclerAdapter.ViewHolder>() {
+class UserRecyclerAdapter(private val presenter: UserListPresenterInterface) :
+    RecyclerView.Adapter<UserRecyclerAdapter.ViewHolder>() {
+
+    @Inject
+    lateinit var imageLoader: ImageLoaderInterface<ImageView>
 
     inner class ViewHolder(private val ui: UserRecyclerviewItemBinding) :
         RecyclerView.ViewHolder(ui.root), UserItemView {
@@ -33,6 +35,9 @@ RecyclerView.Adapter<UserRecyclerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(UserRecyclerviewItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false)).apply {
+            presenter.apply {
+                App.instance.appComponent.inject(this@UserRecyclerAdapter)
+            }
             itemView.setOnClickListener { presenter.itemClickListener?.invoke(this) }
         }
 

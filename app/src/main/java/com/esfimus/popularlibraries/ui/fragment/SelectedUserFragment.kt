@@ -7,15 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.FragmentSelectedUserBinding
-import com.esfimus.popularlibraries.mvp.model.api.repositories.ApiUserRepositories
 import com.esfimus.popularlibraries.mvp.model.entity.GithubUser
-import com.esfimus.popularlibraries.mvp.model.entity.room.RoomRepositoriesCache
-import com.esfimus.popularlibraries.mvp.model.repo.repositories.RetrofitGithubRepositories
 import com.esfimus.popularlibraries.mvp.presenter.repositories.RepositoryPresenter
 import com.esfimus.popularlibraries.mvp.view.repositories.RepositoryView
 import com.esfimus.popularlibraries.ui.activity.BackButtonListener
 import com.esfimus.popularlibraries.ui.adapter.RepositoryRecyclerAdapter
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -29,17 +25,9 @@ class SelectedUserFragment(val name: String) : MvpAppCompatFragment(), Repositor
     private var adapter: RepositoryRecyclerAdapter? = null
 
     private val presenter: RepositoryPresenter by moxyPresenter {
-        RepositoryPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitGithubRepositories(
-                ApiUserRepositories.api,
-                App.networkStatus,
-                RoomRepositoriesCache()
-            ),
-            App.instance.router,
-            App.instance.openRepository,
-            name
-        )
+        RepositoryPresenter(name).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     companion object {

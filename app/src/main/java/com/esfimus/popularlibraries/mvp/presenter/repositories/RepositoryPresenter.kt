@@ -8,14 +8,18 @@ import com.esfimus.popularlibraries.navigation.OpenRepository
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
+import javax.inject.Inject
 
-class RepositoryPresenter(
-    private val uiScheduler: Scheduler,
-    private val repository: GithubUserRepositoryInterface,
-    private val router: Router,
-    private val openRepository: OpenRepository,
-    private val userLogin: String
-) : MvpPresenter<RepositoryView>() {
+class RepositoryPresenter(private val userLogin: String) : MvpPresenter<RepositoryView>() {
+
+    @Inject
+    lateinit var uiScheduler: Scheduler
+    @Inject
+    lateinit var repository: GithubUserRepositoryInterface
+    @Inject
+    lateinit var router: Router
+    @Inject
+    lateinit var openRepository: OpenRepository
 
     class RepositoryListPresenterPresenter : RepositoryListPresenterInterface {
 
