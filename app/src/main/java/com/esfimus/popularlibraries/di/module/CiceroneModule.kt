@@ -1,9 +1,7 @@
 package com.esfimus.popularlibraries.di.module
 
 import com.esfimus.popularlibraries.navigation.AndroidScreens
-import com.esfimus.popularlibraries.navigation.OpenRepository
-import com.esfimus.popularlibraries.navigation.OpenUser
-import com.esfimus.popularlibraries.navigation.ScreensInterface
+import com.esfimus.popularlibraries.navigation.Screens
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
@@ -29,13 +27,5 @@ class CiceroneModule {
 
     @Singleton
     @Provides
-    fun screens(): ScreensInterface = AndroidScreens()
-
-    @Singleton
-    @Provides
-    fun openUser(): OpenUser = AndroidScreens()
-
-    @Singleton
-    @Provides
-    fun openRepository(): OpenRepository = AndroidScreens()
+    fun screens(): Screens = AndroidScreens()
 }

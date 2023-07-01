@@ -7,15 +7,14 @@ import com.esfimus.popularlibraries.ui.fragment.SelectedUserFragment
 import com.esfimus.popularlibraries.ui.fragment.UsersFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
-class AndroidScreens : ScreensInterface, OpenUser, OpenRepository {
+class AndroidScreens : Screens {
 
     override fun users() =
         FragmentScreen { UsersFragment.newInstance() }
 
-    override fun goToUser(user: GithubUser) =
+    override fun user(user: GithubUser) =
         FragmentScreen { SelectedUserFragment.newInstance(user) }
 
-    override fun goToRepository(repository: GithubRepository) =
+    override fun repository(repository: GithubRepository) =
         FragmentScreen { RepositoryFragment.newInstance(repository) }
-
 }

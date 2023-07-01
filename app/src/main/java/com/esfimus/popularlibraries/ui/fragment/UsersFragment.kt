@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.FragmentUsersBinding
-import com.esfimus.popularlibraries.mvp.presenter.user.UsersPresenter
-import com.esfimus.popularlibraries.mvp.view.user.UsersView
+import com.esfimus.popularlibraries.di.user.UserSubcomponent
+import com.esfimus.popularlibraries.mvp.presenter.UsersPresenter
+import com.esfimus.popularlibraries.mvp.view.UsersView
 import com.esfimus.popularlibraries.ui.activity.BackButtonListener
-import com.esfimus.popularlibraries.ui.adapter.UserRecyclerAdapter
+import com.esfimus.popularlibraries.ui.adapter.UsersRecyclerAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -18,10 +19,12 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     private var _ui: FragmentUsersBinding? = null
     private val ui get() = _ui!!
-    private var adapter: UserRecyclerAdapter? = null
+    private var adapter: UsersRecyclerAdapter? = null
+    private var userSubcomponent: UserSubcomponent? = null
     private val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter().apply {
-            App.instance.appComponent.inject(this)
+            userSubcomponent = App.instance.initUserSubcomponent()
+            userSubcomponent?.inject(this)
         }
     }
 
@@ -40,7 +43,9 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     override fun init() {
         with (ui) {
             recyclerUsers.layoutManager = LinearLayoutManager(context)
-            adapter = UserRecyclerAdapter(presenter.usersListPresenter)
+            adapter = UsersRecyclerAdapter(presenter.usersListPresenter).apply {
+                userSubcomponent?.inject(this)
+            }
             recyclerUsers.adapter = adapter
         }
     }

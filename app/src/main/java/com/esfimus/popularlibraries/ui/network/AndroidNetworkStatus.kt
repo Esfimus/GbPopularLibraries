@@ -4,10 +4,10 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
-import com.esfimus.popularlibraries.mvp.model.network.NetworkStatusInterface
+import com.esfimus.popularlibraries.mvp.model.network.NetworkStatus
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 
-class AndroidNetworkStatus(context: Context) : NetworkStatusInterface {
+class AndroidNetworkStatus(context: Context) : NetworkStatus {
 
     private val statusSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
