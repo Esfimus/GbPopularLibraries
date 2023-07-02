@@ -7,9 +7,9 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.esfimus.popularlibraries.mvp.view.ImageLoaderInterface
+import com.esfimus.popularlibraries.mvp.view.ImageLoader
 
-class GlideImageLoader : ImageLoaderInterface<ImageView> {
+class GlideImageLoader : ImageLoader<ImageView> {
     override fun loadImage(url: String, container: ImageView) {
         Glide.with(container.context)
             .asBitmap()

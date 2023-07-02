@@ -8,31 +8,32 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.esfimus.popularlibraries.App
 import com.esfimus.popularlibraries.databinding.FragmentSelectedUserBinding
 import com.esfimus.popularlibraries.mvp.model.entity.GithubUser
-import com.esfimus.popularlibraries.mvp.presenter.repositories.RepositoryPresenter
-import com.esfimus.popularlibraries.mvp.view.repositories.RepositoryView
+import com.esfimus.popularlibraries.mvp.presenter.SelectedUserPresenter
+import com.esfimus.popularlibraries.mvp.view.UserView
 import com.esfimus.popularlibraries.ui.activity.BackButtonListener
-import com.esfimus.popularlibraries.ui.adapter.RepositoryRecyclerAdapter
+import com.esfimus.popularlibraries.ui.adapter.RepositoriesRecyclerAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 private const val USER = "selected_user"
 
-class SelectedUserFragment(val name: String) : MvpAppCompatFragment(), RepositoryView, BackButtonListener {
+class SelectedUserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
 
     private var _ui: FragmentSelectedUserBinding? = null
     private val ui get() = _ui!!
-    private var user: GithubUser? = null
-    private var adapter: RepositoryRecyclerAdapter? = null
+    private var adapter: RepositoriesRecyclerAdapter? = null
 
-    private val presenter: RepositoryPresenter by moxyPresenter {
-        RepositoryPresenter(name).apply {
-            App.instance.appComponent.inject(this)
+    @Suppress("Deprecation")
+    private val presenter: SelectedUserPresenter by moxyPresenter {
+        val user = arguments?.getParcelable<GithubUser>(USER) as GithubUser
+        SelectedUserPresenter(user).apply {
+            App.instance.initRepositorySubcomponent()?.inject(this)
         }
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(user: GithubUser) = SelectedUserFragment(user.login!!).apply {
+        fun newInstance(user: GithubUser) = SelectedUserFragment().apply {
             arguments = Bundle().apply { putParcelable(USER, user) }
         }
     }
@@ -47,21 +48,16 @@ class SelectedUserFragment(val name: String) : MvpAppCompatFragment(), Repositor
         _ui = null
     }
 
-    @Suppress("DEPRECATION")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            user = it.getParcelable(USER)
+    override fun init() {
+        with (ui) {
+            recyclerRepositories.layoutManager = LinearLayoutManager(context)
+            adapter = RepositoriesRecyclerAdapter(presenter.repositoriesListPresenter)
+            recyclerRepositories.adapter = adapter
         }
     }
 
-    override fun init() {
-        with (ui) {
-            login.text = user?.login ?: ""
-            recyclerRepositories.layoutManager = LinearLayoutManager(context)
-            adapter = RepositoryRecyclerAdapter(presenter.repositoryListPresenter)
-            recyclerRepositories.adapter = adapter
-        }
+    override fun setLogin(login: String) {
+        ui.login.text = login
     }
 
     @SuppressLint("NotifyDataSetChanged")
