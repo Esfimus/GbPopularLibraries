@@ -67,4 +67,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
 
     implementation 'com.github.bumptech.glide:glide:4.14.2'
+
+    testImplementation 'org.mockito:mockito-core:5.5.0'
+    testImplementation 'org.mockito:mockito-inline:5.2.0'
+    testImplementation('com.nhaarman:mockito-kotlin:1.6.0') {
+        exclude group: 'org.jetbrains.kotlin'
+        exclude group: 'org.mockito'
+    }
 }
